@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+using TMPro;
 
 public class CollisionReceiver : MonoBehaviour
 {
 
   float energy = 100;
+  float score = 0;
+
+  public TextMeshProUGUI gameScoreText;
 
   private GameObject life_bar;
   private Vector2 original_scale;
@@ -27,11 +30,22 @@ public class CollisionReceiver : MonoBehaviour
 
   }
 
+  void increase_score (float val)
+  {
+    //subtract energy
+    score += val; //score = score + val;
+    //Score: score;
+    gameScoreText.text = "Score: "+score;
+    print ("Score is " + score);
+  }
 
   void touched (float val)
   {
     //subtract energy
     energy -= val;
+
+    if (energy > 100) { energy = 100; }
+    if (energy < 0) { energy = 0; }
 
     new_scale.x = original_scale.x * (energy / 100f );
 
@@ -39,7 +53,7 @@ public class CollisionReceiver : MonoBehaviour
 
     print ("I've been touched and my energy is " + energy);
     if (energy <= 0) {
-      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+      Destroy (gameObject);
     }
   }
 
