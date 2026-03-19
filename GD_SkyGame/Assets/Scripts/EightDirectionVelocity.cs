@@ -17,7 +17,7 @@ public class EightDirectionVelocity : MonoBehaviour
 		rb.gravityScale = 0;
 
 		//The rigidBody inertia.
-		rb.drag = 10;
+		rb.linearDamping = 10;
 
 		//Mass of the rigidbody.
 		rb.mass = 10;
@@ -30,7 +30,7 @@ public class EightDirectionVelocity : MonoBehaviour
 	{
 
 		//in Unity change the Rigidbody2d interpolation to "interpolate"
-		Vector2 vel = rb.velocity;
+		Vector2 vel = rb.linearVelocity;
 
 		//Input.GetKey returns true is the key is held down
 		if (Input.GetKey (KeyCode.RightArrow))
@@ -45,6 +45,6 @@ public class EightDirectionVelocity : MonoBehaviour
 		if (Input.GetKey (KeyCode.DownArrow))
 		vel.y = -speed;
 
-		rb.velocity = vel;
+		rb.linearVelocity = vel;
 	}
 }
