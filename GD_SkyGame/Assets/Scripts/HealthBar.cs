@@ -7,11 +7,13 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private RectTransform _barRect;
     [SerializeField] private RectMask2D _mask;
 
-    private float _maxWidth;
+    private float _paddingRatio;
 
     private void Start()
     {
-        _maxWidth = _barRect.rect.width;
+        Canvas.ForceUpdateCanvases();
+
+        _paddingRatio = 293f / _barRect.rect.width;
         UpdateUI(_health.Hp);
     }
 
@@ -23,10 +25,15 @@ public class HealthBar : MonoBehaviour
     private void UpdateUI(int currentHp)
     {
         float hpPercent = Mathf.Clamp01((float)currentHp / _health.MaxHp);
-        float newRightPadding = _maxWidth * (1f - hpPercent);
+
+        // Dynamically calculate the right padding for any resolution
+        float currentFullPadding = _barRect.rect.width * _paddingRatio;
+        float targetPadding = currentFullPadding * (1f - hpPercent);
 
         Vector4 padding = _mask.padding;
-        padding.z = newRightPadding;
+        padding.z = targetPadding;
         _mask.padding = padding;
     }
+
+
 }

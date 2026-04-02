@@ -10,12 +10,6 @@ public class ScreenWrap : MonoBehaviour
   //real margin beyond the viewport (1 is the size of the screen, see below)
   public float overflow = .05f; //<<<<<REMEMBER THE STUPID f
 
-  // Use this for initialization
-  void Start ()
-  {
-
-  }
-
   // Update is called once per frame
   void Update ()
   {
@@ -33,12 +27,6 @@ public class ScreenWrap : MonoBehaviour
 
     if (viewportPosition.x < 0 - overflow)
     newPosition.x = 1 + overflow;
-
-    if (viewportPosition.y > 1 + overflow)
-    newPosition.y = 0 - overflow;
-
-    if (viewportPosition.y < 0 - overflow)
-    newPosition.y = 1 + overflow;
 
     //convert back to world coordinates
     transform.position = cam.ViewportToWorldPoint (newPosition);

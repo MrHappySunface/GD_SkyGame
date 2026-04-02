@@ -4,21 +4,32 @@ using UnityEngine;
 
 public class Collision : MonoBehaviour
 {
-  void OnCollisionEnter2D (Collision2D coll)
-  {
-    if (coll.gameObject.tag == "player") {
-      Debug.Log("HIT HIT HIT");
-      if (gameObject.tag != "friend") {
-        //if I have a reference to a specific object I can call a method (function attached) on it
-        //so I don't have to detect the collision on the other object as well
-        coll.gameObject.SendMessage ("touched", 10);
 
-        //destroy bill
-        //Destroy (gameObject);
-      } else {
-        coll.gameObject.SendMessage ("increase_score", 10);
-      }
+    [Header("Pickup Sound")]
+    public AudioClip pickupSound;
+    public float volume = 1f;
+    public Vector2 scoreRange = new Vector2(10f, 15f);
+
+    private void OnTriggerEnter2D (Collider2D col)
+    {
+        if (col.TryGetComponent<Health>(out var health))
+        {
+            if (gameObject.tag != "friend")
+            {
+                Debug.Log($"{gameObject.name} Hit");
+                health.Damage(5);
+            }
+            else
+            {
+                col.gameObject.SendMessage("increase_score", scoreRange);
+            }
+
+            AudioSource playerAudio = col.GetComponent<AudioSource>();
+            if (playerAudio != null && pickupSound != null)
+            {
+                playerAudio.PlayOneShot(pickupSound, volume);
+            }
+            Destroy(gameObject);
+        }
     }
-
-  }
 }

@@ -20,23 +20,22 @@ public class Health : MonoBehaviour
             {
                 Damaged?.Invoke(_hp);
             }
-
-            if (_hp <= 0)
-            {
-                Died?.Invoke();
-            }
         }
     }
 
     public UnityEvent<int> Damaged;
-    public UnityEvent Died;
 
-    private void Awake()
+    private void OnEnable()
     {
         _hp = _maxHp;
     }
 
-    public void Damage(int amount) => Hp -= amount;
+    public void Damage(int amount)
+    {
+        Hp -= amount;
+        Debug.Log($"Taking Damage. Current HP: {_hp}");
+        
+    }
     public void Kill() => Hp = 0;
     public void Adjust(int value) => Hp = value;
 }
