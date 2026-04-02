@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class CollisionReceiver : MonoBehaviour
@@ -39,7 +37,7 @@ public class CollisionReceiver : MonoBehaviour
     print ("Score is " + score);
   }
 
-  void touched (float val)
+  public void touched (float val)
   {
     //subtract energy
     energy -= val;
@@ -53,8 +51,9 @@ public class CollisionReceiver : MonoBehaviour
 
     print ("I've been touched and my energy is " + energy);
     if (energy <= 0) {
-      Destroy (gameObject);
-    }
+            Scene currentScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(currentScene.buildIndex);
+        }
   }
 
 }
