@@ -17,11 +17,12 @@ public class Collision : MonoBehaviour
             if (gameObject.tag != "friend")
             {
                 Debug.Log($"{gameObject.name} Hit");
-                health.Damage(5);
+                health.Damage(10);
             }
             else
             {
                 col.gameObject.SendMessage("increase_score", scoreRange);
+                health.Heal(1);
             }
 
             AudioSource playerAudio = col.GetComponent<AudioSource>();

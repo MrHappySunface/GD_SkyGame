@@ -3,7 +3,7 @@ using TMPro;
 
 public class CollisionReceiver : MonoBehaviour
 {
-    float score = 0;
+    public float score = 0;
     public TextMeshProUGUI gameScoreText;
     private AudioSource playerAudio;
 

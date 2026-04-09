@@ -15,15 +15,17 @@ public class Health : MonoBehaviour
         private set
         {
             var isDamage = value < _hp;
+            var isHeal = value > _hp;
+
             _hp = Mathf.Clamp(value, 0, _maxHp);
-            if (isDamage)
-            {
-                Damaged?.Invoke(_hp);
-            }
+            
+            if (isDamage) Damaged?.Invoke(_hp);
+            if (isHeal) Healed?.Invoke(_hp);
         }
     }
 
     public UnityEvent<int> Damaged;
+    public UnityEvent<int> Healed;
 
     private void OnEnable()
     {
@@ -34,6 +36,12 @@ public class Health : MonoBehaviour
     {
         Hp -= amount;
         Debug.Log($"Taking Damage. Current HP: {_hp}");
+        
+    }
+    public void Heal(int amount)
+    {
+        Hp += amount;
+        Debug.Log($"Healing. Current HP: {_hp}");
         
     }
     public void Kill() => Hp = 0;
