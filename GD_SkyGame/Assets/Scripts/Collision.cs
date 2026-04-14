@@ -14,15 +14,28 @@ public class Collision : MonoBehaviour
     {
         if (col.TryGetComponent<Health>(out var health))
         {
-            if (gameObject.tag != "friend")
-            {
-                Debug.Log($"{gameObject.name} Hit");
-                health.Damage(10);
-            }
-            else
+            if (gameObject.CompareTag("friend"))
             {
                 col.gameObject.SendMessage("increase_score", scoreRange);
-                health.Heal(1);
+                health.Heal(3);
+            }
+
+            if (gameObject.CompareTag("love"))
+            {
+                col.gameObject.SendMessage("increase_score", scoreRange);
+                health.Heal(50);
+            }
+
+            if (gameObject.CompareTag("bigdrop"))
+            {
+                Debug.Log($"{gameObject.name} Hit");
+                health.Damage(20);
+            }
+
+            if (gameObject.CompareTag("evil"))
+            {
+                Debug.Log($"{gameObject.name} Hit");
+                health.Damage(5);
             }
 
             AudioSource playerAudio = col.GetComponent<AudioSource>();

@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 1263089988200153919}
   m_Layer: 0
   m_Name: Raindrop
-  m_TagString: Untagged
+  m_TagString: evil
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -177,6 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Collision
   pickupSound: {fileID: 8300000, guid: 0109e67a9d994c24b92df3f75310df9c, type: 3}
   volume: 3
+  scoreRange: {x: 10, y: 15}
 --- !u!61 &603572188955296371
 BoxCollider2D:
   m_ObjectHideFlags: 0

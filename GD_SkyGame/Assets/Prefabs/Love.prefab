@@ -80,7 +80,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 857dbe369ac484eb0a697a1533e03c5e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -177,6 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Collision
   pickupSound: {fileID: 8300000, guid: 1450c020250548944b32058ba291ae57, type: 3}
   volume: 0.5
+  scoreRange: {x: 10, y: 15}
 --- !u!61 &4741901248896907078
 BoxCollider2D:
   m_ObjectHideFlags: 0
